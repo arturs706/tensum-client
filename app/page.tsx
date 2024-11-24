@@ -1,101 +1,162 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect } from "react";
+import {
+  ArrowRight,
+  Globe,
+  Smartphone,
+  Database,
+  Cpu
+} from "lucide-react";
+import Lenis from "lenis";
+
+const GridBackground = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className="h-screen w-full bg-black bg-grid-white/[0.2] relative flex items-center justify-center">
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      {children}
     </div>
   );
-}
+};
+
+const LandingPage = () => {
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section with Grid Background */}
+      <GridBackground>
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex flex-col items-center text-center">
+            <div className="max-w-2xl mx-auto">
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+                <span className="block text-gray-300">High-Performance</span>
+                <span className="block bg-clip-text text-transparent bg-gradient-to-b from-blue-200 to-blue-500">
+                  Software Solutions
+                </span>
+              </h1>
+              <p className="mt-6 text-lg text-gray-300">
+                Specializing in scalable web applications, mobile solutions, and
+                low-latency systems for modern businesses.
+              </p>
+              <div className="mt-8 flex gap-4 justify-center">
+                <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
+                  Start Project <ArrowRight className="ml-2 h-5 w-5" />
+                </button>
+                <button className="inline-flex items-center px-6 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-white/10">
+                  Technical Specs
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </GridBackground>
+      {/* Services Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-900">
+              Technical Expertise
+            </h2>
+            <p className="mt-4 text-lg text-gray-500">
+              Building high-performance solutions with cutting-edge technology
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                icon: <Globe className="h-6 w-6" />,
+                title: "Web Applications",
+                description:
+                  "Scalable, responsive web applications using React, Next.js, and modern frameworks.",
+                features: [
+                  "React & Next.js",
+                  "Progressive Web Apps",
+                  "Real-time Features",
+                ],
+              },
+              {
+                icon: <Smartphone className="h-6 w-6" />,
+                title: "Mobile Apps",
+                description:
+                  "Native and cross-platform mobile applications with optimal performance.",
+                features: [
+                  "React Native",
+                  "Native iOS/Android",
+                  "Cross-platform Solutions",
+                ],
+              },
+              {
+                icon: <Database className="h-6 w-6" />,
+                title: "System Architecture",
+                description:
+                  "Scalable system design and cloud infrastructure architecture.",
+                features: [
+                  "Microservices",
+                  "Cloud-native Design",
+                  "Distributed Systems",
+                ],
+              },
+              {
+                icon: <Cpu className="h-6 w-6" />,
+                title: "Low Latency Backends",
+                description:
+                  "High-performance backend systems optimized for speed and reliability.",
+                features: [
+                  "Event-driven Architecture",
+                  "Real-time Processing",
+                  "Performance Optimization",
+                ],
+              },
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-500 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div>
+                  <span className="rounded-lg inline-flex p-3 bg-blue-50 text-blue-700">
+                    {service.icon}
+                  </span>
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-lg font-medium">
+                    <a href="#" className="focus:outline-none">
+                      {service.title}
+                      <span className="absolute inset-0" aria-hidden="true" />
+                    </a>
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-500">
+                    {service.description}
+                  </p>
+                </div>
+                <div className="mt-4 space-y-1">
+                  {service.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="text-sm text-gray-600">
+                      • {feature}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+  );
+};
+
+export default LandingPage;
